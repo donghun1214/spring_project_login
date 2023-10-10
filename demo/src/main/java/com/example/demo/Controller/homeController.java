@@ -5,10 +5,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.DTO.MemberForm;
+import com.example.demo.Domain.Member;
+import com.example.demo.Service.MemberService;
 
 @Controller
 public class homeController {
     
+    //어떤 REPOSTIORY 를 쓸 지 모르기 때문에 DI 기능을 구현했다.
+    private final MemberService memberService;
+    public homeController(MemberService memberService) {
+        this.memberService = memberService;
+    }
+
     @GetMapping("/")
     public String home(){
         return "home";
@@ -16,8 +24,15 @@ public class homeController {
 
     @PostMapping("/")
     public String create(MemberForm form){
+        Member member = new Member();
         
-        return "redirect:/";
+        member.setLoginId(form.getLoginId());
+        member.setPwd(form.getPwd());
+        member.setName(form.getName());
+        
+        memberService.join(member);
+        
+        return "redirect:/sign_in";
     }
 }
 
