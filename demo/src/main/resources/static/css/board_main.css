@@ -176,3 +176,37 @@ table {
     height: 1px;
   }
   
+  .btn-profile {
+    display: inline-block;
+    margin-top: 20px;  /* 상단 여백 추가 */
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #2980b9;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-profile:hover {
+    background-color: #2471a3; /* 호버 시의 색상 조절 */
+}
+
+.btn-write {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #2980b9;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  float: right;  /* 버튼을 오른쪽에 위치시킵니다 */
+  margin-top: 20px;  /* 버튼 위에 조금의 여백을 줍니다 */
+}
+
+.btn-write:hover {
+  background-color: #2471a3; /* 호버 시의 색상 조절 */
+}

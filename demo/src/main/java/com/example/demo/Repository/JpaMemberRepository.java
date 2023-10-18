@@ -15,8 +15,12 @@ public class JpaMemberRepository implements MemberRepository{
     }
     
     public Member save(Member member) {
-        em.persist(member); //데이터베이스에 저장
-        return member; //반환된 객체가 활용되는 용도가 많아서 Member 형을 반환한대.
+        if (member.getId() == null) {  // 신규 멤버인 경우
+            em.persist(member);        // 데이터베이스에 저장
+            return member;
+        } else {                        // 기존 멤버인 경우
+            return em.merge(member);   // 데이터베이스에 업데이트
+        }
     }
 
     public Optional<Member> findById(Long id) {
@@ -32,5 +36,4 @@ public class JpaMemberRepository implements MemberRepository{
                         
         return result.stream().findAny();
     }
-
 }

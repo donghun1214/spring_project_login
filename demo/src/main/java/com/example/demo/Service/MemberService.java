@@ -1,7 +1,6 @@
 package com.example.demo.Service;
 
-
-import com.example.demo.DTO.loginMemberForm;
+import com.example.demo.DTO.MemberForm;
 import com.example.demo.Domain.Member;
 import com.example.demo.Repository.MemberRepository;
 import java.util.Optional;
@@ -28,7 +27,7 @@ public class MemberService {
                             throw new IllegalStateException("이미 존재하는 회원입니다.");});
     }
 
-    public Member sign_in(loginMemberForm form){
+    public Member sign_in(MemberForm form){
         Optional<Member> byLoginId = memberRepository.findByLoginId(form.getLoginId()); //DB에서 LoginID를 찾는다. 
         if(byLoginId.isPresent()){
             Member member = byLoginId.get();
@@ -41,5 +40,19 @@ public class MemberService {
         } else{
             return null;
         }
+    }
+
+    public Member updateForm(String loginId) {
+        Optional<Member> optionalMember = memberRepository.findByLoginId(loginId);
+        if (optionalMember.isPresent()) {
+            Member member = optionalMember.get();
+            return member;
+        } else {
+            return null;
+        }
+    }
+
+    public void update(Member member) {
+        memberRepository.save(member);
     }
 }

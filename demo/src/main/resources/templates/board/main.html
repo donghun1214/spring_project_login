@@ -9,11 +9,13 @@
     <section class="notice">
         <div class="page-title">
             <div class="container">
-                <h4 th:text="${session.name + ' 님 환영합니다!'}"></h4><br><br>
-                <h3> 김동훈의 내면 일기장 </h3>
+                <h4 th:text="${session.name + ' 님 환영합니다!'}"></h4>
+                <a href = "/member/update"><button class="btn-profile">회원정보 수정</button></a>
+                <a href = "/member/logout"><button class="btn-profile">로그아웃</button></a><br><br>
+                <h3> 나의 내면일지 </h3>
             </div>
         </div>
-  
+
         <!-- board seach area -->
         <div id="board-search">
             <div class="container">
@@ -22,7 +24,7 @@
                         <div class="search-wrap">
                             <label for="search" class="blind">공지사항 내용 검색</label>
                             <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
-                            <button type="submit" class="btn btn-dark">검색</button>
+                            <button type="submit" class="btn btn-dark btn-search">검색</button>
                         </div>
                     </form>
                 </div>
@@ -38,34 +40,25 @@
                         <th scope="col" class="th-num">번호</th>
                         <th scope="col" class="th-title">제목</th>
                         <th scope="col" class="th-date">등록일</th>
+                        <th scope="col" class="th-title">조회수</th>
+                        <th scope="col" class="th-title">글쓴이</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>3</td>
-                        <th>
-                            <a href="#!">[공지사항] 개인정보 처리방침 변경안내처리방침</a>
-                            <p>테스트</p>
-                        </th>
-                        <td>2017.07.13</td>
-                    </tr>
-    
-                    <tr>
-                        <td>2</td>
-                        <th><a href="#!">공지사항 안내입니다. 이용해주셔서 감사합니다</a></th>
-                        <td>2017.06.15</td>
-                    </tr>
-    
-                    <tr>
-                        <td>1</td>
-                        <th><a href="#!">공지사항 안내입니다. 이용해주셔서 감사합니다</a></th>
-                        <td>2017.06.15</td>
-                    </tr>
+                        <tr th:each="board: ${boardList}">
+                            <td th:text="${board.id}"></td>
+                            <td><a th:href="@{|/board/${board.id}|}" th:text="${board.boardTitle}"></a></td>
+                            <td th:text="*{#temporals.format(board.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                            <td th:text="${board.boardHits}"></td>
+                        </tr>
                     </tbody>
                 </table>
+                
+                <form action = "/board/write" method = "get">
+                    <button class = "btn-write">글쓰기</button>
+                </form>
             </div>
         </div>
-  
-  </section>
+</section>
 </body>
 </html>

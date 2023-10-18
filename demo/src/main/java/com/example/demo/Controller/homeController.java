@@ -32,7 +32,7 @@ public class homeController {
         
         memberService.join(member);
         
-        return "redirect:/sign_in";
+        return "redirect:/member/sign_in";
     }
 }
 
