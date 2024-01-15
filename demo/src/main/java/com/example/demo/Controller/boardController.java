@@ -17,13 +17,16 @@ import com.example.demo.Service.BoardService;
 public class boardController {
     private final BoardService boardService;
     public boardController(BoardService boardService) {
+
         this.boardService = boardService;
+
     }
 
     @GetMapping("/main")
     public String findAll(Model model){
         List<BoardDTO> boardDTOList = boardService.findAll();
         model.addAttribute("boardList", boardDTOList);
+        System.out.println("hello0115");
         return "board/main";
     }
 
